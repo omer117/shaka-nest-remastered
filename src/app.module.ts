@@ -5,9 +5,9 @@ import { ProductsModule } from './products/products.module';
 import { OrdersModule } from './orders/orders.module';
 import { DailyForecastModule } from './daily_forecast/daily_forecast.module';
 import { BeachesModule } from './beaches/beaches.module';
-import { AuthModule } from './auth/auth.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Product } from './products/entities/product.entity';
+import { UsersModule } from './users/users.module';
 
 @Module({
   imports: [TypeOrmModule.forRoot({
@@ -24,7 +24,7 @@ import { Product } from './products/entities/product.entity';
       rejectUnauthorized:false,
       
     }
-  }),ProductsModule, OrdersModule, DailyForecastModule, BeachesModule, AuthModule],
+  }),UsersModule,ProductsModule, OrdersModule, DailyForecastModule, BeachesModule, UsersModule],
   controllers: [AppController],
   providers: [AppService],
 })

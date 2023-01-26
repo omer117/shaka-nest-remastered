@@ -1,4 +1,5 @@
 import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { getegid } from 'process';
 import { DailyForecastService } from './daily_forecast.service';
 import { CreateDailyForecastDto } from './dto/create-daily_forecast.dto';
 
@@ -20,5 +21,15 @@ export class DailyForecastController {
   @Delete(':id')
   remove(@Param('id') id: string) {
     return this.dailyForecastService.remove(+id);
+  }
+
+  @Get()
+  updater(){
+    return this.dailyForecastService.weatherUpdateScript();
+  }
+
+  @Patch(':id')
+  updateForecast(@Param('id') id:number, @Body() req:any){
+    this.dailyForecastService.update(id, req);
   }
 }
