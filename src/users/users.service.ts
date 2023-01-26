@@ -1,26 +1,46 @@
 import { Injectable } from '@nestjs/common';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
+import { User } from './entities/user.entity';
+import * as bcrypt from 'bcrypt';
 
 @Injectable()
 export class UsersService {
-  create(createUserDto: CreateUserDto) {
-    return 'This action adds a new user';
+  constructor(@InjectRepository(User) private UserRepository: Repository<User>) { }
+
+  async create(createUserDto: CreateUserDto) {
+    const salt = 10;
+    let { username, email, password } = createUserDto
+    const hashedPass = await bcrypt.hash(password, salt)
+    password = hashedPass.toString()
+    const newUser = this.UserRepository.create({ username, email, password })
+    await this.UserRepository.save(newUser)
+    return newUser;
   }
 
   findAll() {
-    return `This action returns all users`;
+    return this.UserRepository.find();
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} user`;
+  findOne(id: string) {
+    return this.UserRepository.findOne({ where: { user_id: id } });
   }
 
-  update(id: number, updateUserDto: UpdateUserDto) {
-    return `This action updates a #${id} user`;
+  remove(id: string) {
+    return this.UserRepository.delete(id)
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} user`;
+
+  async validateUser(userDet: any) {
+    const user = await this.UserRepository.findOne({ where: { username: userDet.username } })
+    const isMatch = await bcrypt.compare(userDet.password,user.password)
+    if(user && isMatch){
+      const {username,user_id} =user
+      return [user_id,username]
+    }else{
+      return "No User found"
+    }
   }
 }
