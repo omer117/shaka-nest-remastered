@@ -6,24 +6,24 @@ export class DailyForecast {
 @PrimaryGeneratedColumn()
 forecast_id:number;
 
-@Column()
-wave_height:string;
+@Column({nullable: true})
+wave_height:string | null;
 
-@Column()
+@Column({nullable: true})
 wind_direction:string;
 
-@Column()
+@Column({ nullable: true })
 wind_speed:string;
 
-@Column()
+@Column({ nullable: true })
 water_temperature:string;
 
-@Column()
+@Column({ nullable: true })
 last_updated:Date;
 
-@Column()
+@Column({ nullable: true })
 beach_id: number;
 
-@Column()
+@Column({ nullable: true })
 beach_name:string;
 }

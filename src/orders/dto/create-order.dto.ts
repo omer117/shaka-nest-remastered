@@ -5,7 +5,7 @@ export class CreateOrderDto {
 @IsNotEmpty()
 items_purchased: any | null
 
-@IsNotEmpty()
+// @IsNotEmpty()
 purchase_date: Date;
 
 
