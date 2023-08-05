@@ -11,20 +11,22 @@ import { UsersModule } from './users/users.module';
 
 @Module({
   imports: [TypeOrmModule.forRoot({
-    url:'postgres://shaka_nest_remastered_user:m6xl7ImkObYHstWtKsP4TdllkRHhPZP4@dpg-cf3fsmp4reb5o40npc20-a.frankfurt-postgres.render.com/shaka_nest_remastered',
+    url:'postgres://shaka_nxac_user:KneKPMHwl3Y4hsV8Nzxcm29XR6o4dFcT@dpg-citf3qp5rnuhcntnc98g-a.oregon-postgres.render.com/shaka_nxac',
     type:'postgres',
-    host:'dpg-cf3fsmp4reb5o40npc20-a',
+    host:'dpg-citf3qp5rnuhcntnc98g-a',
     port:5432,
-    username:'shaka_nest_remastered_user',
-    password:'m6xl7ImkObYHstWtKsP4TdllkRHhPZP4',
-    database:'shaka_nest_remastered',
+    username:'shaka_nxac_user',
+    password:'KneKPMHwl3Y4hsV8Nzxcm29XR6o4dFcT',
+    database:'shaka_nxac',
     autoLoadEntities:true,
     synchronize:true,
     ssl:{
       rejectUnauthorized:false,
       
     }
-  }),UsersModule,ProductsModule, OrdersModule, DailyForecastModule, BeachesModule, UsersModule],
+  }),UsersModule,ProductsModule, 
+  OrdersModule,
+   DailyForecastModule, BeachesModule, UsersModule],
   controllers: [AppController],
   providers: [AppService],
 })

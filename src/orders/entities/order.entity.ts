@@ -9,7 +9,7 @@ order_id: number;
 @Column({type: "json"})
 items_purchased:any | null
 
-@Column()
+@Column({ nullable: true })
 purchase_date: Date;
 
 @Column({ nullable: true })

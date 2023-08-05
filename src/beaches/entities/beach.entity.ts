@@ -6,12 +6,12 @@ export class Beaches {
     @PrimaryGeneratedColumn()
     beach_id:number;
 
-    @Column()
+    @Column({ nullable: true })
     beach_name:string;
 
-    @Column() 
+    @Column({ nullable: true }) 
     lat: string;
 
-    @Column()
+    @Column({ nullable: true })
     lon:string;
 }
